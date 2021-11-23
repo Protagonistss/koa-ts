@@ -1,4 +1,6 @@
 import Koa from 'koa'
+import winston from 'winston'
+import { createConnection, ConnectionOptions } from 'typeorm'
 
 const app = new Koa()
 
