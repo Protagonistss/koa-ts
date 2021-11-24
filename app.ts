@@ -1,5 +1,6 @@
 import Koa from 'koa'
-import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm'
+import { createConnection, ConnectionOptions } from 'typeorm'
+import { registRouter } from './src/routes'
 
 
 const connectionOptions:ConnectionOptions = {
@@ -14,21 +15,11 @@ const connectionOptions:ConnectionOptions = {
   logging: false,
 }
 
-// const connectionOptions: ConnectionOptions = await getConnectionOptions()
-
-// const connectionOptions: ConnectionOptions = async () => {
-//   const options = await getConnectionOptions()
-//   return options
-// }
-
 
 createConnection(connectionOptions)
-.then(async () => {
+  .then(async () => {
   const app = new Koa()
-  app.use(ctx => {
-    ctx.body = 'Hello World'
-  })
-  
+  registRouter(app)
   app.listen(3000)
 })
 .catch((error: string) => {
