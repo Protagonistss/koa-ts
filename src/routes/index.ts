@@ -1,8 +1,8 @@
 import Koa from 'koa'
-import { userRouter } from './user'
+import { useUserRouter } from './user'
 
 const registRouter = (app: Koa) => {
-  app.use(userRouter.routes())
+  app.use(useUserRouter)
 }
 
 export { registRouter }

@@ -14,7 +14,9 @@ userRouter.swagger({
 
 userRouter.mapDir(resolve(__dirname, '../controllers'))
 
-export { userRouter }
+const useUserRouter = userRouter.routes()
+
+export { useUserRouter }
 
 
 
