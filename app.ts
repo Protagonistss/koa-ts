@@ -1,7 +1,10 @@
 import Koa from 'koa'
 import { createConnection, ConnectionOptions } from 'typeorm'
-import { registRouter } from './src/routes'
+import { router } from './src/routes'
+import { config as reloadEnv } from 'dotenv'
+import { catchError } from './src/handlers/errorHandler'
 
+reloadEnv()
 
 const connectionOptions:ConnectionOptions = {
   type: 'mysql',
@@ -15,11 +18,11 @@ const connectionOptions:ConnectionOptions = {
   logging: false,
 }
 
-
 createConnection(connectionOptions)
   .then(async () => {
   const app = new Koa()
-  registRouter(app)
+  process.env.RUN_TIME === 'dev' && catchError(app)
+  app.use(router.routes())
   app.listen(3000)
 })
 .catch((error: string) => {

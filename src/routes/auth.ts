@@ -1,16 +1,16 @@
 import { SwaggerRouter } from 'koa-swagger-decorator'
-import { user } from '../controllers'
+import { auth } from '../controllers'
 import { resolve } from 'path'
 
-const userRouter = new SwaggerRouter()
+const useAuth = new SwaggerRouter()
 
-userRouter.get('/user', user.getUsers)
+useAuth.get('/auth', auth.auth)
 
-userRouter.swagger({
-  title: 'Koa Api',
-  description: 'api doc',
+useAuth.swagger({
+  title: 'auth',
+  description: 'auth module',
   version: '1',
-  prefix: '/api/user',
+  prefix: '/api/auth',
   swaggerHtmlEndpoint: '/swagger-html',
   swaggerJsonEndpoint: '/swagger-json',
   swaggerOptions: {
@@ -32,11 +32,11 @@ userRouter.swagger({
   }
 })
 
-userRouter.mapDir(resolve(__dirname, '../controllers'))
+useAuth.mapDir(resolve(__dirname, '../controllers'))
 
-const useUserRouter = userRouter.routes()
+const useAuthRouter = useAuth.routes()
 
-export { useUserRouter }
+export { useAuthRouter }
 
 
 

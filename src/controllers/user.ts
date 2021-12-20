@@ -4,7 +4,7 @@ import { Context } from 'koa'
 @responsesAll({ 200: { description: 'success' } })
 @tagsAll(['User'])
 export default class UserController {
-  @request('get', '/userInfo')
+  @request('get', '/user/info')
   @summary('Find user info')
   public static async getUsers(ctx: Context): Promise<void> {
     ctx.body = { user: 'Hello' }
